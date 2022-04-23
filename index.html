@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centering anything with CSS</title>
+    <style>
+        :root {
+            color-scheme: light dark;
+            font-family: sans-serif;
+        }
+        :is(header, main, footer) :is([style]):hover::after {
+            content: "← "attr(style);
+            position: absolute;
+            margin-left: 1rem;
+            font-style: italic;
+            font-weight: 400;
+            font-size: 0.8em;
+            margin-top: 0.2em;
+        }
+        body {
+            margin: 5vmin;
+        }
+        main {
+            max-width: 60ch;
+            margin-inline: auto;
+            line-height: 1.5em;
+        }
+        ul li {
+            line-height: 2em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 style="text-align: center">How to center anything with CSS</h1>
+    </header>
+    <main>
+        <h2 style="text-align: center">Inline normal text</h2>
+        <p style="text-align: center">Here we go, a clear cut guide to centering stuff.</p>
+        <p>
+            Already I'm gritting my teeth because of my British English wanting to 'centre' everything instead, but there you go.
+            <br>
+            <br>This is how it works:
+        </p>
+        <ul>
+            <li>Everything that's centered on this page is centred with inline styles.</li>
+            <li>When hovering over a centered element, the styles in use will show.</li>
+            <li>If you know how to use the dev tools in your browser, use that too!</li>
+        </ul>
+    </main>
+    <footer></footer>
+</body>
+</html>
