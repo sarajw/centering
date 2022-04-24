@@ -9,6 +9,7 @@
         :root {
             color-scheme: light dark;
             font-family: sans-serif;
+            box-sizing: border-box;
         }
         :is([style], [parstyle]):hover {
             border-radius: 0.25rem;
@@ -19,18 +20,21 @@
         :is([style], [parstyle]) > :is([style], [parstyle]):hover {
             outline: 1px magenta dashed;
         }
-        :is([style], [parstyle]):hover::after {
+        footer, :is([style], [parstyle]):hover::after {
             position: fixed;
             display: block;
-            width: 100%;
-            margin-block: 0;
+            margin: 0;
             padding: 1rem;
+            color: hsla(0 0% 50% / 1);
             background-color: black;
             font-family: monospace;
             font-weight: 400;
             font-size: 1rem;
             left: 0;
-            z-index: 1;
+            right: 0;
+            bottom: 0;
+            height: 3rem;
+            text-align: left;
         }
         :is([style]):hover::after {
             content: attr(style);
@@ -39,12 +43,12 @@
             content: "(parent) "attr(parstyle);
         }
         :not([style], [parstyle]) > :is([style], [parstyle]):hover::after {
-            bottom: 0;
             color: cornflowerblue;
+            z-index: 1;
         }
         :is([style], [parstyle]) > :is([style], [parstyle]):hover::after {
-            bottom: 3rem;
             color: magenta;
+            z-index: 2;
         }
         body {margin:0}
         header {
@@ -57,14 +61,7 @@
             margin-inline: auto;
             padding-inline: 1em;
             line-height: 1.5em;
-            padding-block-end: 10rem;
-        }
-        footer {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            height: fit-content;
-            background-color: black;
+            padding-block-end: 5rem;
         }
         h1 {margin:0}
         ul li {
@@ -75,7 +72,7 @@
             max-width: clamp(20ch, 75vw, 40ch);
             margin-block: 1rem;
             display: flex;
-            background-color: rgba(128,128,128, 0.25);
+            background-color: hsla(0 0% 50% / 0.25);
             border-radius: 0.25rem;
         }
     </style>
@@ -93,9 +90,9 @@
                 <br>This is how it works:
             </p>
             <ul>
-                <li>Most things that are centered on this page, are centred with inline styles.</li>
-                <li>Hover or tap a centered element to show the styles used below.</li>
-                <li>If you know how to use the dev tools in your browser, use that too!</li>
+                <li>Most things that are centered on this page, are centered with inline styles.</li>
+                <li>Hover (or tap on mobile) an element to show the styles used to center it.</li>
+                <li>If you know how to use the dev tools in your browser, do explore :)</li>
             </ul>
         </section>
         <br />
@@ -119,6 +116,6 @@
 
         </section>
     </main>
-    <footer></footer>
+    <footer>styles will appear here</footer>
 </body>
 </html>
