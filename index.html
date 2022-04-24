@@ -11,15 +11,26 @@
             font-family: sans-serif;
         }
         :is([style], [parstyle]):hover {
-            outline: 1px dashed;
+            border-radius: 0.25rem;
+        }
+        :not([style], [parstyle]) > :is([style], [parstyle]):hover {
+            outline: 1px cornflowerblue dashed;
+        }
+        :is([style], [parstyle]) > :is([style], [parstyle]):hover {
+            outline: 1px magenta dashed;
         }
         :is([style], [parstyle]):hover::after {
             position: fixed;
-            font-style: italic;
+            display: block;
+            width: 100%;
+            margin-block: 0;
+            padding: 1rem;
+            background-color: black;
+            font-family: monospace;
             font-weight: 400;
-            font-size: 1.2rem;
-            line-height: 1.5rem;
-            left: 1rem;
+            font-size: 1rem;
+            left: 0;
+            z-index: 1;
         }
         :is([style]):hover::after {
             content: attr(style);
@@ -28,70 +39,84 @@
             content: "(parent) "attr(parstyle);
         }
         :not([style], [parstyle]) > :is([style], [parstyle]):hover::after {
-            bottom: 2.5rem;
+            bottom: 0;
+            color: cornflowerblue;
         }
         :is([style], [parstyle]) > :is([style], [parstyle]):hover::after {
-            bottom: 0.5rem;
+            bottom: 3rem;
+            color: magenta;
         }
-        body {
-            margin: 0;
-            display: grid;
-            grid-template-rows: auto 1fr 5rem;
-            justify-content: center;
+        body {margin:0}
+        header {
+            height: 4rem;
+            line-height: 4rem;
+            margin: 0.5rem;
         }
-        main > * {
+        main {
             max-width: 65ch;
+            margin-inline: auto;
             padding-inline: 1em;
             line-height: 1.5em;
+            padding-block-end: 10rem;
         }
         footer {
             position: fixed;
             bottom: 0;
             width: 100%;
-            height: 5rem;
-            outline: 1px dashed;
+            height: fit-content;
+            background-color: black;
         }
+        h1 {margin:0}
         ul li {
-            line-height: 2em;
+            margin-block: 0.5em;
             margin-inline-start: 1em;
         }
         [title="flex"] {
+            max-width: clamp(20ch, 75vw, 40ch);
+            margin-block: 1rem;
             display: flex;
-            gap: 1em;
-            justify-content: center;
             background-color: rgba(128,128,128, 0.25);
+            border-radius: 0.25rem;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1 style="text-align: center">How to center anything with CSS</h1>
+        <h1 style="text-align: center">Centering</h1>
     </header>
     <main>
         <section title="intro">
-            <p style="text-align: center">Here we go, hopefully this will be
-                <br />a clear cut guide to centering stuff.</p>
+            <h2 style="text-align: center">How to center anything with CSS</h2>
             <p>
                 Already I'm gritting my teeth because of my British English wanting to 'centre' everything instead, but there you go.
                 <br>
                 <br>This is how it works:
             </p>
             <ul>
-                <li>Everything that's centered on this page is centred with inline styles.</li>
-                <li>When hovering over a centered element, the styles in use will show.</li>
+                <li>Most things that are centered on this page, are centred with inline styles.</li>
+                <li>Hover or tap a centered element to show the styles used below.</li>
                 <li>If you know how to use the dev tools in your browser, use that too!</li>
             </ul>
         </section>
-
+        <br />
         <section title="flex and grid">
-            <h2 style="text-align: center">For example:</h2>
-            <p>This block of text is within the &lt;main&gt; element, which is itself within a CSS grid. Its parent (&lt;body&gt;) is a CSS grid.</p>
+            <h2 style="text-align: center">Flex and Grid</h2>
+            <p>Below is a default flex container, declared only with <code>display:flex</code>.</p>
+            <p></p>
+            <p>There are several properties you can use to get stuff to center:</p>
 
-            <article title="flex">
-                <p parstyle="justify-content: center">Test</p>
-                <p parstyle="justify-content: center">this</p>
-                <p parstyle="justify-content: center">out</p>
+            <article style="margin-inline: auto; justify-content: center" title="flex">
+                <p parstyle="justify-content: center">[ Mouse ]</p>
+                <p parstyle="justify-content: center">[ over ]</p>
+                <p parstyle="justify-content: center">[ us ]</p>
             </article>
+
+            <article style="margin-inline: auto; place-content: center" title="flex">
+                <p parstyle="place-content: center">[ Mouse ]</p>
+                <p parstyle="place-content: center">[ over ]</p>
+                <p parstyle="place-content: center">[ us ]</p>
+            </article>
+
         </section>
     </main>
     <footer></footer>
