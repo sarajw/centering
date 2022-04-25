@@ -11,20 +11,25 @@
             font-family: sans-serif;
             box-sizing: border-box;
         }
+
         :is([style], [parstyle]):hover {
             border-radius: 0.25rem;
         }
+
         :not([style], [parstyle]) > :is([style], [parstyle]):hover {
             outline: 1px cornflowerblue dashed;
         }
+
         :is([style], [parstyle]) > :is([style], [parstyle]):hover {
             outline: 1px magenta dashed;
         }
+
         footer, :is([style], [parstyle]):hover::after {
             position: fixed;
             display: block;
             margin: 0;
             padding: 1rem;
+            line-height: 1.5rem;
             color: hsla(0 0% 50% / 1);
             background-color: black;
             font-family: monospace;
@@ -33,29 +38,42 @@
             left: 0;
             right: 0;
             bottom: 0;
-            height: 3rem;
             text-align: left;
+            min-height: 3rem;
         }
+        :is([style], [parstyle]):hover::after {
+            height: fit-content;
+        }
+
         :is([style]):hover::after {
             content: attr(style);
         }
+
         :is([parstyle]):hover::after {
             content: "(parent) "attr(parstyle);
         }
+
         :not([style], [parstyle]) > :is([style], [parstyle]):hover::after {
             color: cornflowerblue;
             z-index: 1;
         }
+
         :is([style], [parstyle]) > :is([style], [parstyle]):hover::after {
             color: magenta;
             z-index: 2;
         }
-        body {margin:0}
+
+        body {
+            margin:0;
+            background-color: hsla(0 0% 50% / 0.1);
+        }
+
         header {
             height: 4rem;
             line-height: 4rem;
             margin: 0.5rem;
         }
+
         main {
             max-width: 65ch;
             margin-inline: auto;
@@ -63,18 +81,30 @@
             line-height: 1.5em;
             padding-block-end: 5rem;
         }
+
         h1 {margin:0}
+
         ul li {
             margin-block: 0.5em;
-            margin-inline-start: 1em;
         }
-        [title="flex"] {
-            max-width: clamp(20ch, 75vw, 40ch);
+
+        code {
+            font-size: 1rem;
+            background-color: hsla(0 0% 50% / 0.15);
+            padding: 0.1rem 0.25rem;
+            border-radius: 0.25rem;
+        }
+
+        .flex {
             margin-block: 1rem;
             display: flex;
+            gap: 1rem;
             background-color: hsla(0 0% 50% / 0.25);
             border-radius: 0.25rem;
         }
+        .taller {height:8rem}
+        .column {flex-direction: column}
+        .column p {margin:0}
     </style>
 </head>
 <body>
@@ -83,7 +113,7 @@
     </header>
     <main>
         <section title="intro">
-            <h2 style="text-align: center">How to center anything with CSS</h2>
+            <h2 style="text-align:center">How to center anything with CSS</h2>
             <p>
                 Already I'm gritting my teeth because of my British English wanting to 'centre' everything instead, but there you go.
                 <br>
@@ -97,21 +127,88 @@
         </section>
         <br />
         <section title="flex and grid">
-            <h2 style="text-align: center">Flex and Grid</h2>
-            <p>Below is a default flex container, declared only with <code>display:flex</code>.</p>
-            <p></p>
-            <p>There are several properties you can use to get stuff to center:</p>
-
-            <article style="margin-inline: auto; justify-content: center" title="flex">
-                <p parstyle="justify-content: center">[ Mouse ]</p>
-                <p parstyle="justify-content: center">[ over ]</p>
-                <p parstyle="justify-content: center">[ us ]</p>
+            <h2 style="text-align:center">Flex and Grid</h2>
+            <h3>Flex</h3>
+            <h4>Rows - Horizontal centering</h4>
+            <p>Below is a simple flex container (which defaults to rows, not columns), declared with just <code>display:flex</code> and <code>gap:1rem</code>.</p>
+            <p>There are two properties you can use to get stuff to center horizontally in the default horizontal flex box:</p>
+            <ul>
+                <li>justify-content: center
+                    <article style="justify-content:center" class="flex">
+                        <p>Three</p>
+                        <p>little</p>
+                        <p>elements</p>
+                    </article>
+                </li>
+                <li>place-content: center
+                    <article style="place-content:center" class="flex">
+                        <p>See</p>
+                        <p>how they</p>
+                        <p>center</p>
+                    </article>
+                </li>
+            </ul>
+            <br />
+            <h4>Rows - Vertical centering</h4>
+            <p>When your flexbox is taller, you may want to center vertically. Then you can use the sisters to justify- and place-content, <code>align-items</code> and <code>place-items</code></p>
+            <ul>
+                <li>align-items:center
+                    <article style="align-items:center" class="flex taller">
+                        <p>Three</p>
+                        <p>little</p>
+                        <p>elements</p>
+                    </article>
+                </li>
+                <li>place-items:center
+                    <article style="place-items:center" class="flex taller">
+                        <p>See</p>
+                        <p>how they</p>
+                        <p>center</p>
+                    </article>
+                </li>
+            </ul>
+            <p>The two properties <code>justify-content</code> and <code>align-items</code> are complementary, you can use them together to centre both horizontally and vertically. It's also hard to remember which one is which - what if it's justify-items and align-content? Argh!</p>
+            <p>This is why the <code>place-content</code> and <code>place-items</code> properties are handy, as you need not remember which goes with which.</p>
+            <article style="place-content:center; place-items:center" class="flex taller">
+                <p>Three</p>
+                <p>little</p>
+                <p>elements</p>
             </article>
-
-            <article style="margin-inline: auto; place-content: center" title="flex">
-                <p parstyle="place-content: center">[ Mouse ]</p>
-                <p parstyle="place-content: center">[ over ]</p>
-                <p parstyle="place-content: center">[ us ]</p>
+            <br />
+            <h4>Columns - The properties flip</h4>
+            <p>Now let's look at a flex box flow that has been turned 90 degrees, with <code>flex-direction:column</code>.</p>
+            <p>Now the two propeties swap, <code>align-items/place-items</code> now does the horizontal centering, while in a taller box than the contents, <code>justify-content/place-content</code> are needed to keep the elements inside a flex box vertically centered.</p>
+            
+            <ul>
+                <li>align-items:center
+                    <article style="align-items:center" class="flex column">
+                        <p>Two</p>
+                        <p>elements</p>
+                    </article>
+                </li>
+                <li>place-items:center
+                    <article style="place-items:center" class="flex column">
+                        <p>See how</p>
+                        <p>they center</p>
+                    </article>
+                </li>
+                <li>justify-content:center
+                    <article style="justify-content:center" class="flex column taller">
+                        <p>Two</p>
+                        <p>elements</p>
+                    </article>
+                </li>
+                <li>place-content:center
+                    <article style="place-content:center" class="flex column taller">
+                        <p>See how</p>
+                        <p>they center</p>
+                    </article>
+                </li>
+            </ul>
+            <p>You can probably see now that sticking to <code>place-content</code> and <code>place-items</code> and setting them both to <code>center</code> can save you some time, unless you have a fantastic memory!</p>
+            <article style="place-items:center; place-content:center" class="flex column taller">
+                <p>Two</p>
+                <p>elements</p>
             </article>
 
         </section>
