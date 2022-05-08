@@ -6,12 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Centering anything with CSS</title>
     <style>
-        :root {
-            color-scheme: light dark;
+        html {
             font-family: sans-serif;
             box-sizing: border-box;
+            color-scheme: light dark;
 
             --medgrey: 160 40% 70%;
+        }
+        .mode-switcher {
+            position: absolute;
+            width: fit-content;
+            margin: 0.5vmin;
+        }   
+        .mode-switcher button {
+            border: 0;
+            padding: 0.25rem;
+            margin: 0.5vmin 0.25vmin;
+            border-radius: 0.25rem;
         }
 
         :is([style], [parstyle]):hover {
@@ -30,7 +41,7 @@
             position: fixed;
             display: block;
             margin: 0;
-            padding: 3vmin;
+            padding: 1vmin 1.5vmin;
             line-height: 1.5em;
             background-color: Canvas;
             border-top: 1px solid hsla(var(--medgrey) / 0.25);
@@ -75,6 +86,7 @@
         header {
             position: sticky;
             top: 0;
+            z-index: 1;
             background-color: Canvas;
             border-bottom: 1px solid hsla(var(--medgrey) / 0.25);
             padding: 2vmin 5vmin;
@@ -145,7 +157,7 @@
         }
 
         code, pre, p, ul {
-            font-size: clamp(0.9rem, 4vmin, 1rem);
+            font-size: clamp(0.9rem, 4vmin, 1.1rem);
         }
 
         code, pre {
@@ -157,7 +169,7 @@
         .flex {
             margin-block: 0.5rem;
             display: flex;
-            gap: 3vmin;
+            gap: 0.5rem;
         }
         .flex p {
             padding: 0.2em 0.3em;
@@ -181,7 +193,12 @@
             <li><a href="#flex-grid">Flex & Grid</a></li>
         </ul>
     </header>
+    <div class="mode-switcher">
+        <button onclick="switchLight()">light</button>
+        <button onclick="switchDark()">dark</button>
+    </div>
     <main>
+
         <section title="intro">
             <h2 style="text-align:center;">How to center anything with CSS</h2>
             <p>
@@ -190,9 +207,9 @@
                 <br>This is how it works:
             </p>
             <ul>
-                <li>Most things that are centered on this page, are centered with inline styles.</li>
-                <li>Hover (or tap on mobile) an element to show the styles used to center it.</li>
-                <li>If you know how to use the dev tools in your browser, do explore :)</li>
+                <li>Things that are centered on this page, are centered with inline styles.</li>
+                <li>Hover or tap an element to show the styles used to center it.</li>
+                <li>If you use the dev tools in your browser, do explore :)</li>
             </ul>
         </section>
         <section title="inline elements" id="inline">
@@ -201,15 +218,22 @@
         <section title="block elements" id="block">
             <h2 style="text-align: center;">Block Elements</h2>
         </section>
+        
         <section title="flex and grid" id="flex-grid">
+            
             <h2 style="text-align: center;">Flex and Grid</h2>
-            <p>A little real talk first - flex and grid are a lot when you first come across them!</p>
+            
+            <p>Some real talk first - flex and grid are a lot when you first encounter them!</p>
+            
             <p>To get acquainted with these layout-building CSS tools, I recommend these two <a href="https://css-tricks.com/">CSS-Tricks</a> guides:</p>
+            
             <ul>
                 <li><a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/">A Complete Guide to Flexbox</a></li>
                 <li><a href="https://css-tricks.com/snippets/css/complete-guide-grid/">A Complete Guide to Grid</a></li>
             </ul>
+            
             <p><em>That said</em>, the tl;dr is that you want to use the following CSS on an element with <code>class="container"</code>:</p>
+            
             <pre>.container {
     display: flex;
     <em><code>OR display: grid;</code></em>
@@ -217,48 +241,67 @@
     place-items: center;
 }</pre>
             <p>You can thank me later, or read on to find out more:</p>
+            
             <h3>Flex</h3>
+            
             <article title="flex rows">
+                
                 <h4>Rows - Horizontal centering</h4>
+                
                 <p>Below is a simple flex container (which defaults to rows, not columns), declared with just <code>display: flex;</code> and <code>gap: 1rem;</code>.</p>
+                
                 <p>There are two properties you can use to get stuff to center horizontally in the default horizontal flex box:</p>
+                
                 <h5>justify-content: center;</h5>
                 <div style="justify-content: center;" class="flex">
                     <p>Three</p>
                     <p>little</p>
                     <p>elements</p>
                 </div>
+                
                 <h5>place-content: center;</h5>
                 <div style="place-content: center;" class="flex">
                     <p>See</p>
                     <p>how they</p>
                     <p>center</p>
                 </div>
+                
                 <h4>Rows - Vertical centering</h4>
+                
                 <p>When your flexbox is taller, you may want to center vertically. Then you can use the sisters to justify- and place-content, <code>align-items</code> and <code>place-items</code></p>
+                
                 <h5>align-items: center;</h5>
                 <div style="align-items: center;" class="flex taller">
                     <p>Three</p>
                     <p>little</p>
                     <p>elements</p>
                 </div>
+                
                 <h5>place-items: center;</h5>
                 <div style="place-items: center;" class="flex taller">
                     <p>See</p>
                     <p>how they</p>
                     <p>center</p>
                 </div>
+                
                 <p>The two properties <code>justify-content</code> and <code>align-items</code> are complementary, you can use them together to centre both horizontally and vertically. It's also hard to remember which one is which - what if it's justify-items and align-content? Argh!</p>
+                
                 <p>This is why the <code>place-content</code> and <code>place-items</code> properties are handy, as you need not remember which goes with which.</p>
+                
                 <div style="place-content: center; place-items: center;" class="flex taller">
                     <p>Three</p>
                     <p>little</p>
                     <p>elements</p>
                 </div>
+
             </article>
+
             <article title="flex columns">
+                
                 <h4>Columns - The properties flip</h4>
+                
                 <p>Now let's look at a flex box flow that has been turned 90 degrees, with <code>flex-direction:column;</code>.</p>
+                
                 <p>Now the two propeties swap, <code>align-items/place-items</code> now does the horizontal centering, while in a taller box than the contents, <code>justify-content/place-content</code> are needed to keep the elements inside a flex box vertically centered.</p>
                 
                 <h5>align-items: center;</h5>
@@ -266,21 +309,25 @@
                     <p>Two</p>
                     <p>elements</p>
                 </div>
+
                 <h5>place-items: center;</h5>
                 <div style="place-items: center;" class="flex column">
                     <p>See how</p>
                     <p>they center</p>
                 </div>
+
                 <h5>justify-content: center;</h5>
                 <div style="justify-content: center;" class="flex column taller">
                     <p>Two</p>
                     <p>elements</p>
                 </div>
+
                 <h5>place-content: center;</h5>
                 <div style="place-content: center;" class="flex column taller">
                     <p>See how</p>
                     <p>they center</p>
                 </div>
+
                 <p>You can probably see now that sticking to <code>place-content</code> and <code>place-items</code> and setting them both to <code>center</code> can save you some time, unless you have a fantastic memory!</p>
                 <div style="place-items: center; place-content: center;" class="flex column taller">
                     <p>Two</p>
@@ -288,8 +335,35 @@
                 </div>
             </article>
 
+            <article title="flex self">
+                
+                <h4>Child property align-self</h4>
+
+                <p>There's one special case, if you want to center just one of your flex elements, you can use <code>align-self: center;</code></p>
+
+                <h5>flex row</h5>
+                <div class="flex taller">
+                    <p>Three</p>
+                    <p style="align-self: center;">little</p>
+                    <p>elements</p>
+                </div>
+                
+                <h5>flex column</h5>
+                <div class="flex column taller">
+                    <p>Two</p>
+                    <p style="align-self: center;">elements</p>
+                </div>
+
         </section>
     </main>
     <footer>styles will appear here</footer>
+    <script>
+        function switchDark() {
+            document.querySelector("html").style.colorScheme = "dark";
+        }
+        function switchLight() {
+            document.querySelector("html").style.colorScheme = "light";
+        }
+    </script>
 </body>
 </html>
