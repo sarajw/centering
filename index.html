@@ -11,7 +11,7 @@
             font-family: sans-serif;
             box-sizing: border-box;
 
-            --medgrey: 0 0% 70%;
+            --medgrey: 160 40% 70%;
         }
 
         :is([style], [parstyle]):hover {
@@ -30,8 +30,8 @@
             position: fixed;
             display: block;
             margin: 0;
-            padding: 1rem;
-            line-height: 1.5rem;
+            padding: 3vmin;
+            line-height: 1.5em;
             background-color: Canvas;
             border-top: 1px solid hsla(var(--medgrey) / 0.25);
             font-family: monospace;
@@ -43,8 +43,8 @@
             text-align: left;
             min-height: 3rem;
         }
-        footer {
-            box-shadow: 0 0 40px -30px CanvasText;
+        header, footer {
+            box-shadow: 0 0 30px -20px CanvasText;
         }
         :is([style], [parstyle]):hover::after {
             height: fit-content;
@@ -77,18 +77,36 @@
             top: 0;
             background-color: Canvas;
             border-bottom: 1px solid hsla(var(--medgrey) / 0.25);
-            box-shadow: 0 0 40px -30px CanvasText;
-            height: 4rem;
-            padding: 0.5rem 2rem;
-            display: grid;
-            grid-template-columns: auto 1fr auto;
+            padding: 2vmin 5vmin;
+            display: flex;
+            gap: 3vmin;
+            justify-content: space-between;
             place-items: center;
+        }
+
+        header * {
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            font-size: clamp(1.25rem, 5vmin, 2.5rem);
+        }
+        h1 a {color: CanvasText}
+
+        h2, h3, h4, h5 {
+            margin: 1.5em 0 0.75em;
         }
 
         header ul {
             display: flex;
-            gap: 1rem;
+            gap: 3vmin;
             list-style-type: none;
+        }
+
+        header li {
+            min-width: max-content;
+            font-size: clamp(0.9rem, 4vmin, 1.25rem);
         }
 
         main {
@@ -103,9 +121,6 @@
             scroll-margin-top: 6rem;
             margin-block-end: 3rem;
         }
-
-        h1 {margin:0}
-        h1 a {color: CanvasText}
 
         a {
             display: inline-block;
@@ -129,20 +144,23 @@
             margin-block: 0.5em;
         }
 
+        code, pre, p, ul {
+            font-size: clamp(0.9rem, 4vmin, 1rem);
+        }
+
         code, pre {
-            font-size: 1rem;
             background-color: hsla(var(--medgrey) / 0.25);
-            padding: 0.1rem 0.25rem;
+            padding: 0.2em 0.3em;
             border-radius: 0.25rem;
         }
 
         .flex {
-            margin-block: 1rem;
+            margin-block: 0.5rem;
             display: flex;
-            gap: 1rem;
+            gap: 3vmin;
         }
         .flex p {
-            padding: 0.1rem 0.25rem;
+            padding: 0.2em 0.3em;
         }
         .flex, .flex p {
             background-color: hsla(var(--medgrey) / 0.25);
@@ -157,7 +175,6 @@
 <body>
     <header>
         <h1 title="Website Title"><a href="/">Centering</a></h1>
-        <div></div>
         <ul>
             <li><a href="#inline">Inline</a></li>
             <li><a href="#block">Block</a></li>
@@ -179,13 +196,13 @@
             </ul>
         </section>
         <section title="inline elements" id="inline">
-            <h2 style="text-align:center;">Inline Elements</h2>
+            <h2 style="text-align: center;">Inline Elements</h2>
         </section>
         <section title="block elements" id="block">
-            <h2 style="text-align:center;">Block Elements</h2>
+            <h2 style="text-align: center;">Block Elements</h2>
         </section>
         <section title="flex and grid" id="flex-grid">
-            <h2 style="text-align:center;">Flex and Grid</h2>
+            <h2 style="text-align: center;">Flex and Grid</h2>
             <p>A little real talk first - flex and grid are a lot when you first come across them!</p>
             <p>To get acquainted with these layout-building CSS tools, I recommend these two <a href="https://css-tricks.com/">CSS-Tricks</a> guides:</p>
             <ul>
@@ -194,7 +211,8 @@
             </ul>
             <p><em>That said</em>, the tl;dr is that you want to use the following CSS on an element with <code>class="container"</code>:</p>
             <pre>.container {
-    display: flex; <em><code>OR display: grid;</code></em>
+    display: flex;
+    <em><code>OR display: grid;</code></em>
     place-content: center;
     place-items: center;
 }</pre>
@@ -202,45 +220,37 @@
             <h3>Flex</h3>
             <article title="flex rows">
                 <h4>Rows - Horizontal centering</h4>
-                <p>Below is a simple flex container (which defaults to rows, not columns), declared with just <code>display:flex;</code> and <code>gap:1rem;</code>.</p>
+                <p>Below is a simple flex container (which defaults to rows, not columns), declared with just <code>display: flex;</code> and <code>gap: 1rem;</code>.</p>
                 <p>There are two properties you can use to get stuff to center horizontally in the default horizontal flex box:</p>
-                <ul>
-                    <li>justify-content: center;
-                        <div style="justify-content:center;" class="flex">
-                            <p>Three</p>
-                            <p>little</p>
-                            <p>elements</p>
-                        </div>
-                    </li>
-                    <li>place-content: center;
-                        <div style="place-content:center;" class="flex">
-                            <p>See</p>
-                            <p>how they</p>
-                            <p>center</p>
-                        </div>
-                    </li>
-                </ul>
+                <h5>justify-content: center;</h5>
+                <div style="justify-content: center;" class="flex">
+                    <p>Three</p>
+                    <p>little</p>
+                    <p>elements</p>
+                </div>
+                <h5>place-content: center;</h5>
+                <div style="place-content: center;" class="flex">
+                    <p>See</p>
+                    <p>how they</p>
+                    <p>center</p>
+                </div>
                 <h4>Rows - Vertical centering</h4>
                 <p>When your flexbox is taller, you may want to center vertically. Then you can use the sisters to justify- and place-content, <code>align-items</code> and <code>place-items</code></p>
-                <ul>
-                    <li>align-items: center;
-                        <div style="align-items:center;" class="flex taller">
-                            <p>Three</p>
-                            <p>little</p>
-                            <p>elements</p>
-                        </div>
-                    </li>
-                    <li>place-items: center;
-                        <div style="place-items:center;" class="flex taller">
-                            <p>See</p>
-                            <p>how they</p>
-                            <p>center</p>
-                        </div>
-                    </li>
-                </ul>
+                <h5>align-items: center;</h5>
+                <div style="align-items: center;" class="flex taller">
+                    <p>Three</p>
+                    <p>little</p>
+                    <p>elements</p>
+                </div>
+                <h5>place-items: center;</h5>
+                <div style="place-items: center;" class="flex taller">
+                    <p>See</p>
+                    <p>how they</p>
+                    <p>center</p>
+                </div>
                 <p>The two properties <code>justify-content</code> and <code>align-items</code> are complementary, you can use them together to centre both horizontally and vertically. It's also hard to remember which one is which - what if it's justify-items and align-content? Argh!</p>
                 <p>This is why the <code>place-content</code> and <code>place-items</code> properties are handy, as you need not remember which goes with which.</p>
-                <div style="place-content:center; place-items:center;" class="flex taller">
+                <div style="place-content: center; place-items: center;" class="flex taller">
                     <p>Three</p>
                     <p>little</p>
                     <p>elements</p>
@@ -251,34 +261,28 @@
                 <p>Now let's look at a flex box flow that has been turned 90 degrees, with <code>flex-direction:column;</code>.</p>
                 <p>Now the two propeties swap, <code>align-items/place-items</code> now does the horizontal centering, while in a taller box than the contents, <code>justify-content/place-content</code> are needed to keep the elements inside a flex box vertically centered.</p>
                 
-                <ul>
-                    <li>align-items: center;
-                        <div style="align-items:center;" class="flex column">
-                            <p>Two</p>
-                            <p>elements</p>
-                        </div>
-                    </li>
-                    <li>place-items: center;
-                        <div style="place-items:center;" class="flex column">
-                            <p>See how</p>
-                            <p>they center</p>
-                        </div>
-                    </li>
-                    <li>justify-content: center;
-                        <div style="justify-content:center;" class="flex column taller">
-                            <p>Two</p>
-                            <p>elements</p>
-                        </div>
-                    </li>
-                    <li>place-content: center;
-                        <div style="place-content:center;" class="flex column taller">
-                            <p>See how</p>
-                            <p>they center</p>
-                        </div>
-                    </li>
-                </ul>
+                <h5>align-items: center;</h5>
+                <div style="align-items: center;" class="flex column">
+                    <p>Two</p>
+                    <p>elements</p>
+                </div>
+                <h5>place-items: center;</h5>
+                <div style="place-items: center;" class="flex column">
+                    <p>See how</p>
+                    <p>they center</p>
+                </div>
+                <h5>justify-content: center;</h5>
+                <div style="justify-content: center;" class="flex column taller">
+                    <p>Two</p>
+                    <p>elements</p>
+                </div>
+                <h5>place-content: center;</h5>
+                <div style="place-content: center;" class="flex column taller">
+                    <p>See how</p>
+                    <p>they center</p>
+                </div>
                 <p>You can probably see now that sticking to <code>place-content</code> and <code>place-items</code> and setting them both to <code>center</code> can save you some time, unless you have a fantastic memory!</p>
-                <div style="place-items:center; place-content:center;" class="flex column taller">
+                <div style="place-items: center; place-content: center;" class="flex column taller">
                     <p>Two</p>
                     <p>elements</p>
                 </div>
