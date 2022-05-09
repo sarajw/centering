@@ -11,8 +11,9 @@
             box-sizing: border-box;
             color-scheme: light dark;
 
-            --medgrey: 160 40% 70%;
+            --medgrey: 175 50% 70%;
         }
+
         .mode-switcher {
             position: absolute;
             width: fit-content;
@@ -165,6 +166,9 @@
             padding: 0.2em 0.3em;
             border-radius: 0.25rem;
         }
+        pre {
+            width: fit-content;
+        }
 
         .flex {
             margin-block: 0.5rem;
@@ -208,7 +212,7 @@
             </p>
             <ul>
                 <li>Things that are centered on this page, are centered with inline styles.</li>
-                <li>Hover or tap an element to show the styles used to center it.</li>
+                <li>Hover or tap an element to show the styles used for centering.</li>
                 <li>If you use the dev tools in your browser, do explore :)</li>
             </ul>
         </section>
@@ -234,7 +238,7 @@
             
             <p><em>That said</em>, the tl;dr is that you want to use the following CSS on an element with <code>class="container"</code>:</p>
             
-            <pre>.container {
+            <pre style="margin-inline: auto;">.container {
     display: flex;
     <em><code>OR display: grid;</code></em>
     place-content: center;
